@@ -4,9 +4,9 @@ import { ArrowRight, ArrowUpRight, Package, Truck, Shield, Check, Sparkles } fro
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white text-zinc-900">
+    <div className="min-h-screen bg-[#0a0a0b] text-zinc-100">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-zinc-100">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0b]/80 backdrop-blur-xl border-b border-zinc-800/50">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center shadow-lg shadow-emerald-500/25">
@@ -16,21 +16,18 @@ export default function Home() {
           </Link>
           
           <nav className="hidden md:flex items-center gap-8">
-            <Link href="#features" className="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">Features</Link>
-            <Link href="#how" className="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">How it works</Link>
-            <Link href="#categories" className="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">Categories</Link>
+            <Link href="#features" className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors">Features</Link>
+            <Link href="#how" className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors">How it works</Link>
+            <Link href="#categories" className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors">Categories</Link>
           </nav>
           
           <div className="flex items-center gap-3">
-            <Link href="/login" className="text-sm text-zinc-600 hover:text-zinc-900 transition-colors">
+            <span className="text-sm text-zinc-500 cursor-not-allowed">
               Sign in
-            </Link>
-            <Link 
-              href="/signup" 
-              className="text-sm font-medium bg-zinc-900 text-white px-4 py-2 rounded-full hover:bg-zinc-800 transition-colors"
-            >
-              Get started
-            </Link>
+            </span>
+            <span className="text-sm font-medium bg-zinc-800 text-zinc-400 px-4 py-2 rounded-full cursor-not-allowed">
+              Coming soon
+            </span>
           </div>
         </div>
       </header>
@@ -40,36 +37,32 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="max-w-4xl">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-50 to-cyan-50 border border-emerald-200/50 rounded-full px-4 py-1.5 mb-8">
-              <Sparkles className="w-4 h-4 text-emerald-500" />
-              <span className="text-sm font-medium text-emerald-700">Now delivering to all of Oman</span>
+            <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-4 py-1.5 mb-8">
+              <Sparkles className="w-4 h-4 text-emerald-400" />
+              <span className="text-sm font-medium text-emerald-400">Now delivering to all of Oman</span>
             </div>
             
             {/* Headline */}
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.95] mb-8">
               Shop UAE.
               <br />
-              <span className="bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
                 Delivered to Oman.
               </span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-zinc-500 leading-relaxed max-w-2xl mb-10">
+            <p className="text-xl md:text-2xl text-zinc-400 leading-relaxed max-w-2xl mb-10">
               10,000+ products from verified UAE suppliers. We handle customs, consolidation, and delivery to your door.
             </p>
             
             {/* CTA */}
             <div className="flex flex-col sm:flex-row items-start gap-4">
-              <Link 
-                href="/signup" 
-                className="group inline-flex items-center gap-2 bg-zinc-900 text-white text-base font-medium px-6 py-3.5 rounded-full hover:bg-zinc-800 transition-all hover:gap-3"
-              >
-                Start shopping
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+              <span className="inline-flex items-center gap-2 bg-emerald-500 text-white text-base font-medium px-6 py-3.5 rounded-full opacity-80">
+                Coming soon
+              </span>
               <Link 
                 href="#how" 
-                className="inline-flex items-center gap-2 text-zinc-600 hover:text-zinc-900 text-base font-medium px-6 py-3.5 transition-colors"
+                className="inline-flex items-center gap-2 text-zinc-400 hover:text-zinc-100 text-base font-medium px-6 py-3.5 transition-colors"
               >
                 See how it works
               </Link>
@@ -79,57 +72,57 @@ export default function Home() {
       </section>
 
       {/* Bento Grid */}
-      <section className="py-20 px-6">
+      <section id="features" className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-4">
             {/* Large card */}
-            <div className="md:col-span-2 bg-gradient-to-br from-zinc-50 to-zinc-100/50 rounded-3xl p-10 border border-zinc-200/50">
+            <div className="md:col-span-2 bg-zinc-900/50 rounded-3xl p-10 border border-zinc-800">
               <div className="flex items-start justify-between mb-16">
-                <div className="w-14 h-14 rounded-2xl bg-white shadow-sm border border-zinc-200/50 flex items-center justify-center">
-                  <Truck className="w-7 h-7 text-zinc-700" />
+                <div className="w-14 h-14 rounded-2xl bg-zinc-800 shadow-sm border border-zinc-700 flex items-center justify-center">
+                  <Truck className="w-7 h-7 text-zinc-300" />
                 </div>
-                <span className="text-sm font-medium text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full">
+                <span className="text-sm font-medium text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full">
                   2-4 days
                 </span>
               </div>
               <h3 className="text-3xl font-bold mb-3">Lightning fast delivery</h3>
-              <p className="text-lg text-zinc-500 max-w-md">
+              <p className="text-lg text-zinc-400 max-w-md">
                 From Dubai warehouses to your doorstep in Oman. Faster than you'd expect.
               </p>
             </div>
             
             {/* Stats card */}
-            <div className="bg-zinc-900 text-white rounded-3xl p-10 flex flex-col justify-between">
+            <div className="bg-gradient-to-br from-emerald-600 to-cyan-600 text-white rounded-3xl p-10 flex flex-col justify-between">
               <div className="text-6xl font-bold">500+</div>
               <div>
                 <div className="text-lg font-medium mb-1">Verified suppliers</div>
-                <div className="text-zinc-400 text-sm">Vetted for quality & reliability</div>
+                <div className="text-white/70 text-sm">Vetted for quality & reliability</div>
               </div>
             </div>
             
             {/* Protection card */}
-            <div className="bg-gradient-to-br from-emerald-500 to-cyan-500 text-white rounded-3xl p-10">
-              <Shield className="w-10 h-10 mb-8 opacity-90" />
+            <div className="bg-zinc-900/50 rounded-3xl p-10 border border-zinc-800">
+              <Shield className="w-10 h-10 mb-8 text-emerald-400" />
               <h3 className="text-2xl font-bold mb-2">Buyer protection</h3>
-              <p className="text-white/80">
+              <p className="text-zinc-400">
                 Full refund if items aren't as described. No questions asked.
               </p>
             </div>
             
             {/* Consolidation card */}
-            <div className="bg-gradient-to-br from-zinc-50 to-zinc-100/50 rounded-3xl p-10 border border-zinc-200/50">
-              <Package className="w-10 h-10 mb-8 text-zinc-700" />
+            <div className="bg-zinc-900/50 rounded-3xl p-10 border border-zinc-800">
+              <Package className="w-10 h-10 mb-8 text-cyan-400" />
               <h3 className="text-2xl font-bold mb-2">Order consolidation</h3>
-              <p className="text-zinc-500">
+              <p className="text-zinc-400">
                 Multiple suppliers, one shipment. Save up to 40% on shipping.
               </p>
             </div>
             
             {/* Customs card */}
-            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl p-10 border border-amber-200/50">
+            <div className="bg-gradient-to-br from-amber-600/20 to-orange-600/20 rounded-3xl p-10 border border-amber-500/20">
               <div className="text-4xl mb-6">🛃</div>
               <h3 className="text-2xl font-bold mb-2">Customs? Handled.</h3>
-              <p className="text-zinc-500">
+              <p className="text-zinc-400">
                 We manage all paperwork and clearance. Zero hassle for you.
               </p>
             </div>
@@ -138,28 +131,28 @@ export default function Home() {
       </section>
 
       {/* How it works */}
-      <section id="how" className="py-24 px-6 bg-zinc-50">
+      <section id="how" className="py-24 px-6 bg-zinc-900/30">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
               Simple as 1, 2, 3, 4
             </h2>
-            <p className="text-xl text-zinc-500">No complexity. Just results.</p>
+            <p className="text-xl text-zinc-400">No complexity. Just results.</p>
           </div>
           
           <div className="grid md:grid-cols-4 gap-8">
             {[
-              { num: '01', title: 'Browse', desc: 'Explore 10,000+ products across categories', color: 'from-violet-500 to-purple-500' },
-              { num: '02', title: 'Order', desc: 'Pay by card, transfer, or cash on delivery', color: 'from-blue-500 to-cyan-500' },
-              { num: '03', title: 'We ship', desc: 'Consolidation & customs fully handled', color: 'from-emerald-500 to-green-500' },
-              { num: '04', title: 'Receive', desc: 'Delivered to your door across Oman', color: 'from-orange-500 to-amber-500' },
+              { num: '01', title: 'Browse', desc: 'Explore 10,000+ products across categories', color: 'from-violet-400 to-purple-400' },
+              { num: '02', title: 'Order', desc: 'Pay by card, transfer, or cash on delivery', color: 'from-blue-400 to-cyan-400' },
+              { num: '03', title: 'We ship', desc: 'Consolidation & customs fully handled', color: 'from-emerald-400 to-green-400' },
+              { num: '04', title: 'Receive', desc: 'Delivered to your door across Oman', color: 'from-orange-400 to-amber-400' },
             ].map((step, i) => (
               <div key={i} className="relative">
-                <div className={`text-7xl font-black bg-gradient-to-br ${step.color} bg-clip-text text-transparent opacity-20 mb-4`}>
+                <div className={`text-7xl font-black bg-gradient-to-br ${step.color} bg-clip-text text-transparent opacity-30 mb-4`}>
                   {step.num}
                 </div>
                 <h3 className="text-xl font-bold mb-2">{step.title}</h3>
-                <p className="text-zinc-500">{step.desc}</p>
+                <p className="text-zinc-400">{step.desc}</p>
               </div>
             ))}
           </div>
@@ -174,15 +167,11 @@ export default function Home() {
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
                 What you can buy
               </h2>
-              <p className="text-xl text-zinc-500">Everything you need, from UAE to Oman</p>
+              <p className="text-xl text-zinc-400">Everything you need, from UAE to Oman</p>
             </div>
-            <Link 
-              href="/categories" 
-              className="hidden md:inline-flex items-center gap-1 text-zinc-500 hover:text-zinc-900 font-medium transition-colors"
-            >
-              View all
-              <ArrowUpRight className="w-4 h-4" />
-            </Link>
+            <span className="hidden md:inline-flex items-center gap-1 text-zinc-500 font-medium">
+              More categories coming
+            </span>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -196,24 +185,23 @@ export default function Home() {
               { name: 'Sports & Fitness', count: '800+', image: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?w=400&h=300&fit=crop' },
               { name: 'Health & Safety', count: '600+', image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=300&fit=crop' },
             ].map((cat, i) => (
-              <Link 
+              <div 
                 key={i}
-                href="/categories"
-                className="group bg-white border border-zinc-200 hover:border-zinc-300 rounded-2xl overflow-hidden transition-all hover:shadow-lg hover:shadow-zinc-200/50 hover:-translate-y-1"
+                className="group bg-zinc-900/50 border border-zinc-800 hover:border-zinc-700 rounded-2xl overflow-hidden transition-all hover:shadow-lg hover:shadow-emerald-500/5 hover:-translate-y-1 cursor-pointer"
               >
-                <div className="aspect-[4/3] relative overflow-hidden bg-zinc-100">
+                <div className="aspect-[4/3] relative overflow-hidden bg-zinc-800">
                   <Image
                     src={cat.image}
                     alt={cat.name}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-80"
                   />
                 </div>
                 <div className="p-5">
-                  <div className="font-semibold text-lg mb-1 group-hover:text-emerald-600 transition-colors">{cat.name}</div>
-                  <div className="text-zinc-400 text-sm">{cat.count} items</div>
+                  <div className="font-semibold text-lg mb-1 group-hover:text-emerald-400 transition-colors">{cat.name}</div>
+                  <div className="text-zinc-500 text-sm">{cat.count} items</div>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>
@@ -222,10 +210,10 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="relative overflow-hidden bg-zinc-900 rounded-[2.5rem] p-12 md:p-20">
+          <div className="relative overflow-hidden bg-gradient-to-br from-zinc-900 to-zinc-800 rounded-[2.5rem] p-12 md:p-20 border border-zinc-700/50">
             {/* Background decoration */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-emerald-500/30 to-cyan-500/30 blur-3xl" />
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-violet-500/20 to-blue-500/20 blur-3xl" />
+            <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-violet-500/10 to-blue-500/10 blur-3xl" />
             
             <div className="relative">
               <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight mb-6">
@@ -236,19 +224,12 @@ export default function Home() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-10">
-                <Link 
-                  href="/signup" 
-                  className="inline-flex items-center justify-center gap-2 bg-white text-zinc-900 font-semibold px-8 py-4 rounded-full hover:bg-zinc-100 transition-colors"
-                >
-                  Create free account
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link 
-                  href="/contact" 
-                  className="inline-flex items-center justify-center gap-2 text-white font-semibold px-8 py-4 rounded-full border border-zinc-700 hover:bg-zinc-800 transition-colors"
-                >
-                  Talk to sales
-                </Link>
+                <span className="inline-flex items-center justify-center gap-2 bg-emerald-500 text-white font-semibold px-8 py-4 rounded-full opacity-90">
+                  Launching Soon
+                </span>
+                <span className="inline-flex items-center justify-center gap-2 text-zinc-400 font-semibold px-8 py-4 rounded-full border border-zinc-700">
+                  Stay tuned
+                </span>
               </div>
               
               <div className="flex flex-wrap gap-6 text-zinc-400 text-sm">
@@ -271,7 +252,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-zinc-100 py-12 px-6">
+      <footer className="border-t border-zinc-800 py-12 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
             <div className="flex items-center gap-2.5">
@@ -282,14 +263,14 @@ export default function Home() {
             </div>
             
             <div className="flex flex-wrap gap-8 text-sm text-zinc-500">
-              <Link href="/about" className="hover:text-zinc-900 transition-colors">About</Link>
-              <Link href="/help" className="hover:text-zinc-900 transition-colors">Help</Link>
-              <Link href="/shipping" className="hover:text-zinc-900 transition-colors">Shipping</Link>
-              <Link href="/privacy" className="hover:text-zinc-900 transition-colors">Privacy</Link>
-              <Link href="/terms" className="hover:text-zinc-900 transition-colors">Terms</Link>
+              <span className="cursor-not-allowed">About</span>
+              <span className="cursor-not-allowed">Help</span>
+              <span className="cursor-not-allowed">Shipping</span>
+              <span className="cursor-not-allowed">Privacy</span>
+              <span className="cursor-not-allowed">Terms</span>
             </div>
             
-            <div className="text-sm text-zinc-400">
+            <div className="text-sm text-zinc-600">
               © 2025 GulfMart
             </div>
           </div>
