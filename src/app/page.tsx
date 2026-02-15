@@ -179,13 +179,12 @@ export default function Home() {
                 href={`/categories/${cat.slug}`}
                 className="group block bg-white border border-gray-200 hover:border-gray-300 rounded-2xl overflow-hidden transition-all hover:shadow-xl hover:-translate-y-1"
               >
-                <div className="relative w-full h-0 pb-[75%] bg-gray-100 overflow-hidden">
-                  <Image
+                <div className="relative w-full overflow-hidden bg-gray-100">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                     src={cat.image}
                     alt={cat.name}
-                    fill
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
                 <div className="p-5">
