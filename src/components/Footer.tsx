@@ -1,63 +1,93 @@
-import Link from 'next/link';
+import Link from 'next/link'
+import { Mail, Phone, MapPin } from 'lucide-react'
 
-export default function Footer() {
+export function Footer() {
   return (
-    <footer className="border-t border-zinc-100 py-12 px-6 bg-white">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-          {/* Company */}
+    <footer className="bg-zinc-900/50 border-t border-zinc-800">
+      <div className="max-w-7xl mx-auto px-6 py-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
+          {/* Brand */}
+          <div className="col-span-2 md:col-span-1">
+            <div className="flex items-center gap-2.5 mb-4">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center">
+                <span className="text-white font-bold text-sm">G</span>
+              </div>
+              <span className="font-semibold text-lg">GulfMart</span>
+            </div>
+            <p className="text-sm text-zinc-400 mb-6 max-w-xs">
+              Shop 10,000+ products from verified UAE suppliers. We handle customs, consolidation, and delivery to Oman.
+            </p>
+            <div className="space-y-2 text-sm text-zinc-400">
+              <div className="flex items-center gap-2">
+                <Mail className="w-4 h-4" />
+                <a href="mailto:support@gulfmart.com" className="hover:text-emerald-400">
+                  support@gulfmart.com
+                </a>
+              </div>
+              <div className="flex items-center gap-2">
+                <Phone className="w-4 h-4" />
+                <span>+968 9XXX XXXX</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <MapPin className="w-4 h-4" />
+                <span>Muscat, Oman</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Shop */}
           <div>
-            <h4 className="font-semibold mb-4">Company</h4>
-            <ul className="space-y-2 text-sm text-zinc-500">
-              <li><Link href="/about" className="hover:text-zinc-900 transition-colors">About us</Link></li>
-              <li><Link href="/contact" className="hover:text-zinc-900 transition-colors">Contact</Link></li>
-              <li><Link href="/careers" className="hover:text-zinc-900 transition-colors">Careers</Link></li>
+            <h4 className="font-semibold text-sm uppercase tracking-wider text-zinc-300 mb-4">Shop</h4>
+            <ul className="space-y-3 text-sm text-zinc-400">
+              <li><Link href="/products" className="hover:text-emerald-400 transition-colors">All Products</Link></li>
+              <li><Link href="/categories" className="hover:text-emerald-400 transition-colors">Categories</Link></li>
+              <li><Link href="/products?sale=true" className="hover:text-emerald-400 transition-colors">On Sale</Link></li>
+              <li><Link href="/products?new=true" className="hover:text-emerald-400 transition-colors">New Arrivals</Link></li>
             </ul>
           </div>
 
           {/* Support */}
           <div>
-            <h4 className="font-semibold mb-4">Support</h4>
-            <ul className="space-y-2 text-sm text-zinc-500">
-              <li><Link href="/help" className="hover:text-zinc-900 transition-colors">Help Center</Link></li>
-              <li><Link href="/shipping" className="hover:text-zinc-900 transition-colors">Shipping Info</Link></li>
-              <li><Link href="/returns" className="hover:text-zinc-900 transition-colors">Returns</Link></li>
+            <h4 className="font-semibold text-sm uppercase tracking-wider text-zinc-300 mb-4">Support</h4>
+            <ul className="space-y-3 text-sm text-zinc-400">
+              <li><Link href="/help" className="hover:text-emerald-400 transition-colors">Help Center</Link></li>
+              <li><Link href="/shipping" className="hover:text-emerald-400 transition-colors">Shipping Info</Link></li>
+              <li><Link href="/returns" className="hover:text-emerald-400 transition-colors">Returns</Link></li>
+              <li><Link href="/contact" className="hover:text-emerald-400 transition-colors">Contact Us</Link></li>
             </ul>
           </div>
 
-          {/* Legal */}
+          {/* Company */}
           <div>
-            <h4 className="font-semibold mb-4">Legal</h4>
-            <ul className="space-y-2 text-sm text-zinc-500">
-              <li><Link href="/privacy" className="hover:text-zinc-900 transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="hover:text-zinc-900 transition-colors">Terms of Service</Link></li>
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="font-semibold mb-4">Get in touch</h4>
-            <ul className="space-y-2 text-sm text-zinc-500">
-              <li>support@gulfmart.com</li>
-              <li>+968 1234 5678</li>
-              <li>Muscat, Oman</li>
+            <h4 className="font-semibold text-sm uppercase tracking-wider text-zinc-300 mb-4">Company</h4>
+            <ul className="space-y-3 text-sm text-zinc-400">
+              <li><Link href="/about" className="hover:text-emerald-400 transition-colors">About Us</Link></li>
+              <li><Link href="/privacy" className="hover:text-emerald-400 transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="hover:text-emerald-400 transition-colors">Terms of Service</Link></li>
+              <li><Link href="/careers" className="hover:text-emerald-400 transition-colors">Careers</Link></li>
             </ul>
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-8 border-t border-zinc-100">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center">
-              <span className="text-white font-bold text-sm">G</span>
-            </div>
-            <span className="font-semibold text-lg">GulfMart</span>
-          </div>
-          
-          <p className="text-sm text-zinc-400">
-            © 2025 GulfMart. All rights reserved.
+        {/* Bottom */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mt-12 pt-8 border-t border-zinc-800">
+          <p className="text-sm text-zinc-500">
+            © {new Date().getFullYear()} GulfMart. All rights reserved.
           </p>
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2 text-sm text-zinc-500">
+              <span>We accept:</span>
+              <div className="flex items-center gap-1">
+                <span className="bg-zinc-800 px-2 py-1 rounded text-xs">Visa</span>
+                <span className="bg-zinc-800 px-2 py-1 rounded text-xs">Mastercard</span>
+                <span className="bg-zinc-800 px-2 py-1 rounded text-xs">COD</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
-  );
+  )
 }
+
+export default Footer;

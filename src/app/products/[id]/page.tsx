@@ -1,232 +1,208 @@
-'use client';
+'use client'
 
-import { useState, use } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import ProductCard from '@/components/ProductCard';
-import { getProductById, getProductsByCategory, products } from '@/lib/data';
-import { addToCart } from '@/lib/cart';
-import { Star, Truck, Shield, Package, Minus, Plus, ShoppingCart, Heart, Share2, ChevronRight, MapPin, Check } from 'lucide-react';
+import { useParams } from 'next/navigation'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useState } from 'react'
+import { Header } from '@/components/Header'
+import { Footer } from '@/components/Footer'
+import { getProductById, products } from '@/lib/products'
+import { useCart } from '@/lib/cart-context'
+import { 
+  ShoppingCart, 
+  Star, 
+  Truck, 
+  Shield, 
+  Package, 
+  Check, 
+  Minus, 
+  Plus,
+  ChevronLeft,
+  Heart
+} from 'lucide-react'
 
-export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params);
-  const router = useRouter();
-  const product = getProductById(id);
-  const [quantity, setQuantity] = useState(1);
-  const [addedToCart, setAddedToCart] = useState(false);
+export default function ProductPage() {
+  const params = useParams()
+  const { addItem } = useCart()
+  const [quantity, setQuantity] = useState(1)
+  const [selectedImage, setSelectedImage] = useState(0)
+
+  const product = getProductById(params.id as string)
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-white">
-        <Header />
-        <main className="pt-32 pb-16 px-6 text-center">
-          <div className="text-6xl mb-4">😕</div>
-          <h1 className="text-2xl font-bold mb-2">Product not found</h1>
-          <p className="text-zinc-500 mb-6">The product you&apos;re looking for doesn&apos;t exist.</p>
-          <Link href="/products" className="text-emerald-600 hover:underline">
-            Browse all products
+      <div className="min-h-screen bg-[#0a0a0b] text-zinc-100 flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Product not found</h1>
+          <Link href="/products" className="text-emerald-400 hover:text-emerald-300">
+            ← Back to products
           </Link>
-        </main>
-        <Footer />
+        </div>
       </div>
-    );
+    )
   }
 
-  const relatedProducts = getProductsByCategory(product.category)
-    .filter(p => p.id !== product.id)
-    .slice(0, 4);
-
-  const discount = product.originalPrice 
-    ? Math.round((1 - product.price / product.originalPrice) * 100) 
-    : 0;
-
   const handleAddToCart = () => {
-    addToCart(product, quantity);
-    setAddedToCart(true);
-    setTimeout(() => setAddedToCart(false), 2000);
-  };
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      supplier: product.supplier,
+      quantity,
+    })
+  }
 
-  const handleBuyNow = () => {
-    addToCart(product, quantity);
-    router.push('/cart');
-  };
+  const relatedProducts = products
+    .filter(p => p.categorySlug === product.categorySlug && p.id !== product.id)
+    .slice(0, 4)
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#0a0a0b] text-zinc-100">
       <Header />
-      
-      <main className="pt-24 pb-16 px-6">
+
+      <main className="pt-20 pb-20 px-6">
         <div className="max-w-7xl mx-auto">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-sm text-zinc-500 mb-8">
-            <Link href="/" className="hover:text-zinc-900">Home</Link>
-            <ChevronRight className="w-4 h-4" />
-            <Link href="/products" className="hover:text-zinc-900">Products</Link>
-            <ChevronRight className="w-4 h-4" />
-            <Link href={`/products?category=${product.category}`} className="hover:text-zinc-900 capitalize">
-              {product.category.replace('-', ' ')}
+            <Link href="/" className="hover:text-zinc-300">Home</Link>
+            <span>/</span>
+            <Link href="/products" className="hover:text-zinc-300">Products</Link>
+            <span>/</span>
+            <Link href={`/categories/${product.categorySlug}`} className="hover:text-zinc-300">
+              {product.category}
             </Link>
-            <ChevronRight className="w-4 h-4" />
-            <span className="text-zinc-900 truncate max-w-[200px]">{product.name}</span>
+            <span>/</span>
+            <span className="text-zinc-300 truncate max-w-[200px]">{product.name}</span>
           </nav>
 
-          {/* Product Section */}
-          <div className="grid md:grid-cols-2 gap-12 mb-16">
-            {/* Image */}
-            <div className="relative">
-              <div className="aspect-square relative overflow-hidden bg-zinc-100 rounded-3xl">
+          <div className="grid lg:grid-cols-2 gap-12 mb-20">
+            {/* Images */}
+            <div className="space-y-4">
+              <div className="aspect-square relative rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800">
                 <Image
                   src={product.image}
                   alt={product.name}
                   fill
                   className="object-cover"
+                  priority
                 />
-                {discount > 0 && (
-                  <span className="absolute top-4 left-4 bg-red-500 text-white text-sm font-medium px-3 py-1 rounded-full">
-                    -{discount}% OFF
+                {product.originalPrice && (
+                  <span className="absolute top-4 left-4 bg-red-500 text-white text-sm font-semibold px-3 py-1.5 rounded-full">
+                    -{Math.round((1 - product.price / product.originalPrice) * 100)}% OFF
                   </span>
                 )}
-              </div>
-              
-              {/* Action Buttons */}
-              <div className="absolute top-4 right-4 flex flex-col gap-2">
-                <button className="p-3 bg-white rounded-full shadow-lg hover:bg-zinc-50 transition-colors">
-                  <Heart className="w-5 h-5 text-zinc-600" />
-                </button>
-                <button className="p-3 bg-white rounded-full shadow-lg hover:bg-zinc-50 transition-colors">
-                  <Share2 className="w-5 h-5 text-zinc-600" />
-                </button>
               </div>
             </div>
 
             {/* Details */}
             <div>
-              {/* Seller */}
-              <div className="flex items-center gap-2 text-sm text-zinc-500 mb-2">
-                <MapPin className="w-4 h-4" />
-                <span>{product.seller} • {product.sellerLocation}</span>
-              </div>
-
-              {/* Name */}
-              <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
-
-              {/* Rating */}
-              <div className="flex items-center gap-3 mb-6">
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star 
-                      key={i} 
-                      className={`w-5 h-5 ${i < Math.floor(product.rating) ? 'fill-amber-400 text-amber-400' : 'fill-zinc-200 text-zinc-200'}`} 
-                    />
-                  ))}
+              <div className="mb-6">
+                <p className="text-sm text-emerald-400 font-medium mb-2">{product.supplier}</p>
+                <h1 className="text-3xl md:text-4xl font-bold mb-4">{product.name}</h1>
+                
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="flex items-center gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-5 h-5 ${
+                          i < Math.floor(product.rating)
+                            ? 'text-amber-400 fill-amber-400'
+                            : 'text-zinc-600'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <span className="text-sm text-zinc-400">
+                    {product.rating} ({product.reviews} reviews)
+                  </span>
                 </div>
-                <span className="font-medium">{product.rating}</span>
-                <span className="text-zinc-400">({product.reviews} reviews)</span>
+
+                <p className="text-zinc-400 leading-relaxed">{product.description}</p>
               </div>
 
               {/* Price */}
-              <div className="flex items-baseline gap-3 mb-6">
-                <span className="text-4xl font-bold">${product.price}</span>
+              <div className="flex items-baseline gap-3 mb-8">
+                <span className="text-4xl font-bold text-emerald-400">${product.price}</span>
                 {product.originalPrice && (
-                  <>
-                    <span className="text-xl text-zinc-400 line-through">${product.originalPrice}</span>
-                    <span className="text-emerald-600 font-medium">Save ${product.originalPrice - product.price}</span>
-                  </>
+                  <span className="text-xl text-zinc-500 line-through">${product.originalPrice}</span>
                 )}
               </div>
-
-              {/* Description */}
-              <p className="text-zinc-600 mb-8 leading-relaxed">
-                {product.description}
-              </p>
 
               {/* Features */}
-              <div className="grid grid-cols-3 gap-4 mb-8">
-                <div className="flex items-center gap-2 text-sm">
-                  <div className="p-2 bg-emerald-50 rounded-lg">
-                    <Truck className="w-4 h-4 text-emerald-600" />
+              {product.features && (
+                <div className="mb-8">
+                  <h3 className="text-sm font-semibold uppercase tracking-wider text-zinc-500 mb-3">
+                    Key Features
+                  </h3>
+                  <div className="grid grid-cols-2 gap-2">
+                    {product.features.map((feature, i) => (
+                      <div key={i} className="flex items-center gap-2 text-sm text-zinc-300">
+                        <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                        {feature}
+                      </div>
+                    ))}
                   </div>
-                  <span>{product.deliveryDays} days delivery</span>
                 </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <div className="p-2 bg-emerald-50 rounded-lg">
-                    <Shield className="w-4 h-4 text-emerald-600" />
-                  </div>
-                  <span>Buyer protection</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <div className="p-2 bg-emerald-50 rounded-lg">
-                    <Package className="w-4 h-4 text-emerald-600" />
-                  </div>
-                  <span>Free returns</span>
-                </div>
-              </div>
+              )}
 
-              {/* Stock Status */}
-              <div className="flex items-center gap-2 mb-6">
-                {product.inStock ? (
-                  <>
-                    <Check className="w-5 h-5 text-emerald-500" />
-                    <span className="text-emerald-600 font-medium">In Stock</span>
-                  </>
-                ) : (
-                  <span className="text-red-500 font-medium">Out of Stock</span>
-                )}
-              </div>
-
-              {/* Quantity */}
-              <div className="flex items-center gap-4 mb-6">
-                <span className="font-medium">Quantity:</span>
-                <div className="flex items-center border border-zinc-200 rounded-xl">
-                  <button 
+              {/* Quantity & Add to Cart */}
+              <div className="flex items-center gap-4 mb-8">
+                <div className="flex items-center gap-3 bg-zinc-900 border border-zinc-800 rounded-full px-2">
+                  <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="p-3 hover:bg-zinc-50 transition-colors"
+                    className="p-2 hover:bg-zinc-800 rounded-full transition-colors"
                   >
                     <Minus className="w-4 h-4" />
                   </button>
-                  <span className="px-4 font-medium">{quantity}</span>
-                  <button 
-                    onClick={() => setQuantity(quantity + 1)}
-                    className="p-3 hover:bg-zinc-50 transition-colors"
+                  <span className="w-8 text-center font-medium">{quantity}</span>
+                  <button
+                    onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
+                    className="p-2 hover:bg-zinc-800 rounded-full transition-colors"
                   >
                     <Plus className="w-4 h-4" />
                   </button>
                 </div>
-              </div>
 
-              {/* Actions */}
-              <div className="flex gap-4">
                 <button
                   onClick={handleAddToCart}
-                  disabled={!product.inStock}
-                  className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-medium transition-all ${
-                    addedToCart 
-                      ? 'bg-emerald-500 text-white' 
-                      : 'bg-zinc-100 text-zinc-900 hover:bg-zinc-200'
-                  } disabled:bg-zinc-100 disabled:text-zinc-400 disabled:cursor-not-allowed`}
+                  className="flex-1 flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-4 px-8 rounded-full transition-colors"
                 >
-                  {addedToCart ? (
-                    <>
-                      <Check className="w-5 h-5" />
-                      Added!
-                    </>
-                  ) : (
-                    <>
-                      <ShoppingCart className="w-5 h-5" />
-                      Add to Cart
-                    </>
-                  )}
+                  <ShoppingCart className="w-5 h-5" />
+                  Add to Cart
                 </button>
-                <button
-                  onClick={handleBuyNow}
-                  disabled={!product.inStock}
-                  className="flex-1 bg-zinc-900 text-white py-4 rounded-xl font-medium hover:bg-zinc-800 transition-colors disabled:bg-zinc-300 disabled:cursor-not-allowed"
-                >
-                  Buy Now
+
+                <button className="p-4 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 rounded-full transition-colors">
+                  <Heart className="w-5 h-5" />
                 </button>
+              </div>
+
+              {/* Stock */}
+              <p className="text-sm text-zinc-500 mb-8">
+                {product.stock > 10 ? (
+                  <span className="text-emerald-400">✓ In Stock</span>
+                ) : product.stock > 0 ? (
+                  <span className="text-amber-400">Only {product.stock} left</span>
+                ) : (
+                  <span className="text-red-400">Out of Stock</span>
+                )}
+              </p>
+
+              {/* Trust Badges */}
+              <div className="grid grid-cols-3 gap-4">
+                <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-4 text-center">
+                  <Truck className="w-6 h-6 mx-auto mb-2 text-emerald-400" />
+                  <p className="text-xs text-zinc-400">Free shipping over $50</p>
+                </div>
+                <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-4 text-center">
+                  <Shield className="w-6 h-6 mx-auto mb-2 text-emerald-400" />
+                  <p className="text-xs text-zinc-400">Buyer protection</p>
+                </div>
+                <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-4 text-center">
+                  <Package className="w-6 h-6 mx-auto mb-2 text-emerald-400" />
+                  <p className="text-xs text-zinc-400">Easy returns</p>
+                </div>
               </div>
             </div>
           </div>
@@ -234,10 +210,29 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
           {/* Related Products */}
           {relatedProducts.length > 0 && (
             <section>
-              <h2 className="text-2xl font-bold mb-6">Related Products</h2>
+              <h2 className="text-2xl font-bold mb-8">Related Products</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                {relatedProducts.map((p) => (
-                  <ProductCard key={p.id} product={p} />
+                {relatedProducts.map((related) => (
+                  <Link
+                    key={related.id}
+                    href={`/products/${related.id}`}
+                    className="group bg-zinc-900/50 border border-zinc-800 hover:border-zinc-700 rounded-xl overflow-hidden transition-all"
+                  >
+                    <div className="aspect-square relative overflow-hidden bg-zinc-800">
+                      <Image
+                        src={related.image}
+                        alt={related.name}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-medium text-sm line-clamp-2 mb-2 group-hover:text-emerald-400 transition-colors">
+                        {related.name}
+                      </h3>
+                      <p className="text-emerald-400 font-semibold">${related.price}</p>
+                    </div>
+                  </Link>
                 ))}
               </div>
             </section>
@@ -247,5 +242,5 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
       <Footer />
     </div>
-  );
+  )
 }
