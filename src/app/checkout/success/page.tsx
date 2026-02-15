@@ -16,7 +16,7 @@ export default function CheckoutSuccessPage() {
         <div className="max-w-lg mx-auto text-center">
           {/* Success Icon */}
           <div className="w-20 h-20 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-8">
-            <CheckCircle className="w-10 h-10 text-emerald-400" />
+            <CheckCircle className="w-10 h-10 text-emerald-600" />
           </div>
 
           <h1 className="text-3xl font-bold mb-4">Order Confirmed!</h1>
@@ -27,13 +27,13 @@ export default function CheckoutSuccessPage() {
           {/* Order Number */}
           <div className="bg-gray-50/50 border border-gray-200 rounded-2xl p-6 mb-8">
             <p className="text-sm text-zinc-500 mb-1">Order Number</p>
-            <p className="text-2xl font-mono font-bold text-emerald-400">{orderNumber}</p>
+            <p className="text-2xl font-mono font-bold text-emerald-600">{orderNumber}</p>
           </div>
 
           {/* What's Next */}
           <div className="space-y-4 mb-10">
             <div className="flex items-start gap-4 text-left bg-gray-50/30 border border-gray-200/50 rounded-xl p-4">
-              <Mail className="w-5 h-5 text-emerald-400 mt-0.5" />
+              <Mail className="w-5 h-5 text-emerald-600 mt-0.5" />
               <div>
                 <p className="font-medium mb-1">Confirmation Email</p>
                 <p className="text-sm text-zinc-600">
@@ -42,7 +42,7 @@ export default function CheckoutSuccessPage() {
               </div>
             </div>
             <div className="flex items-start gap-4 text-left bg-gray-50/30 border border-gray-200/50 rounded-xl p-4">
-              <Package className="w-5 h-5 text-emerald-400 mt-0.5" />
+              <Package className="w-5 h-5 text-emerald-600 mt-0.5" />
               <div>
                 <p className="font-medium mb-1">Delivery in 2-4 Days</p>
                 <p className="text-sm text-zinc-600">

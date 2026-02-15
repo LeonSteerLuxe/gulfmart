@@ -4,46 +4,64 @@ import { ArrowRight, Package, Truck, Shield, Check, Sparkles } from 'lucide-reac
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 
+const categories = [
+  { name: 'Electronics', count: '156', image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?w=400&h=300&fit=crop', slug: 'electronics' },
+  { name: 'Tools & Hardware', count: '89', image: 'https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=400&h=300&fit=crop', slug: 'tools' },
+  { name: 'Auto Parts', count: '124', image: 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400&h=300&fit=crop', slug: 'auto' },
+  { name: 'Home & Garden', count: '203', image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop', slug: 'home' },
+  { name: 'Industrial', count: '67', image: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=400&h=300&fit=crop', slug: 'industrial' },
+  { name: 'Office Supplies', count: '145', image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop', slug: 'office' },
+  { name: 'Sports & Fitness', count: '78', image: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?w=400&h=300&fit=crop', slug: 'sports' },
+  { name: 'Health & Safety', count: '92', image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=300&fit=crop', slug: 'health' },
+]
+
+const steps = [
+  { num: '01', title: 'Browse', desc: 'Explore 10,000+ products across categories', color: 'text-violet-500' },
+  { num: '02', title: 'Order', desc: 'Pay by card, transfer, or cash on delivery', color: 'text-blue-500' },
+  { num: '03', title: 'We ship', desc: 'Consolidation & customs fully handled', color: 'text-emerald-500' },
+  { num: '04', title: 'Receive', desc: 'Delivered to your door across Oman', color: 'text-amber-500' },
+]
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-white text-zinc-900">
       <Header />
 
       {/* Hero */}
-      <section style={{ paddingTop: '140px', paddingBottom: '80px', paddingLeft: '24px', paddingRight: '24px', background: 'linear-gradient(to bottom, #ecfdf5, white)' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <div style={{ maxWidth: '900px' }}>
+      <section className="pt-36 pb-20 px-6 bg-gradient-to-b from-emerald-50/50 to-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="max-w-4xl">
             {/* Badge */}
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', backgroundColor: '#d1fae5', border: '1px solid #a7f3d0', borderRadius: '9999px', padding: '6px 16px', marginBottom: '32px' }}>
-              <Sparkles style={{ width: '16px', height: '16px', color: '#059669' }} />
-              <span style={{ fontSize: '14px', fontWeight: 500, color: '#047857' }}>Now delivering to all of Oman</span>
+            <div className="inline-flex items-center gap-2 bg-emerald-100 border border-emerald-200 rounded-full px-4 py-1.5 mb-8">
+              <Sparkles className="w-4 h-4 text-emerald-600" />
+              <span className="text-sm font-medium text-emerald-700">Now delivering to all of Oman</span>
             </div>
             
             {/* Headline */}
-            <h1 style={{ fontSize: 'clamp(48px, 8vw, 96px)', fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 0.95, marginBottom: '32px' }}>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none mb-8">
               Shop UAE.
               <br />
-              <span style={{ background: 'linear-gradient(to right, #059669, #0891b2, #2563eb)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+              <span className="bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent">
                 Delivered to Oman.
               </span>
             </h1>
             
-            <p style={{ fontSize: '20px', color: '#52525b', lineHeight: 1.6, maxWidth: '640px', marginBottom: '40px' }}>
+            <p className="text-xl md:text-2xl text-zinc-600 leading-relaxed max-w-2xl mb-10">
               10,000+ products from verified UAE suppliers. We handle customs, consolidation, and delivery to your door.
             </p>
             
             {/* CTA */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '16px' }}>
+            <div className="flex flex-col sm:flex-row items-start gap-4">
               <Link 
                 href="/products"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', backgroundColor: '#10b981', color: 'white', fontSize: '16px', fontWeight: 500, padding: '14px 24px', borderRadius: '9999px', textDecoration: 'none', boxShadow: '0 10px 25px -5px rgba(16, 185, 129, 0.25)' }}
+                className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white text-base font-medium px-6 py-3.5 rounded-full transition-colors shadow-lg shadow-emerald-500/25"
               >
                 Start Shopping
-                <ArrowRight style={{ width: '16px', height: '16px' }} />
+                <ArrowRight className="w-4 h-4" />
               </Link>
               <Link 
                 href="#how" 
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#52525b', fontSize: '16px', fontWeight: 500, padding: '14px 24px', textDecoration: 'none' }}
+                className="inline-flex items-center gap-2 text-zinc-600 hover:text-zinc-900 text-base font-medium px-6 py-3.5 transition-colors"
               >
                 See how it works
               </Link>
@@ -53,57 +71,57 @@ export default function Home() {
       </section>
 
       {/* Bento Grid */}
-      <section style={{ padding: '80px 24px' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-4">
             {/* Large card */}
-            <div style={{ gridColumn: 'span 2', backgroundColor: 'white', borderRadius: '24px', padding: '40px', border: '1px solid #e5e7eb' }}>
-              <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '64px' }}>
-                <div style={{ width: '56px', height: '56px', borderRadius: '16px', backgroundColor: '#d1fae5', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Truck style={{ width: '28px', height: '28px', color: '#059669' }} />
+            <div className="md:col-span-2 bg-white rounded-3xl p-10 border border-gray-200 hover:border-gray-300 hover:shadow-lg transition-all">
+              <div className="flex items-start justify-between mb-16">
+                <div className="w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center">
+                  <Truck className="w-7 h-7 text-emerald-600" />
                 </div>
-                <span style={{ fontSize: '14px', fontWeight: 500, color: '#047857', backgroundColor: '#d1fae5', padding: '4px 12px', borderRadius: '9999px' }}>
+                <span className="text-sm font-medium text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full">
                   2-4 days
                 </span>
               </div>
-              <h3 style={{ fontSize: '30px', fontWeight: 700, marginBottom: '12px', color: '#18181b' }}>Lightning fast delivery</h3>
-              <p style={{ fontSize: '18px', color: '#52525b', maxWidth: '400px' }}>
+              <h3 className="text-3xl font-bold mb-3 text-zinc-900">Lightning fast delivery</h3>
+              <p className="text-lg text-zinc-600 max-w-md">
                 From Dubai warehouses to your doorstep in Oman. Faster than you'd expect.
               </p>
             </div>
             
             {/* Stats card */}
-            <div style={{ background: 'linear-gradient(to bottom right, #10b981, #06b6d4)', color: 'white', borderRadius: '24px', padding: '40px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '280px' }}>
-              <div style={{ fontSize: '60px', fontWeight: 700 }}>500+</div>
+            <div className="bg-gradient-to-br from-emerald-500 to-cyan-500 text-white rounded-3xl p-10 flex flex-col justify-between min-h-[280px] shadow-xl">
+              <div className="text-6xl font-bold">500+</div>
               <div>
-                <div style={{ fontSize: '18px', fontWeight: 500, marginBottom: '4px' }}>Verified suppliers</div>
-                <div style={{ fontSize: '14px', opacity: 0.8 }}>Vetted for quality & reliability</div>
+                <div className="text-lg font-medium mb-1">Verified suppliers</div>
+                <div className="text-white/80 text-sm">Vetted for quality & reliability</div>
               </div>
             </div>
             
             {/* Protection card */}
-            <div style={{ backgroundColor: 'white', borderRadius: '24px', padding: '40px', border: '1px solid #e5e7eb' }}>
-              <Shield style={{ width: '40px', height: '40px', marginBottom: '32px', color: '#10b981' }} />
-              <h3 style={{ fontSize: '24px', fontWeight: 700, marginBottom: '8px', color: '#18181b' }}>Buyer protection</h3>
-              <p style={{ color: '#52525b' }}>
+            <div className="bg-white rounded-3xl p-10 border border-gray-200 hover:border-gray-300 hover:shadow-lg transition-all">
+              <Shield className="w-10 h-10 mb-8 text-emerald-500" />
+              <h3 className="text-2xl font-bold mb-2 text-zinc-900">Buyer protection</h3>
+              <p className="text-zinc-600">
                 Full refund if items aren't as described. No questions asked.
               </p>
             </div>
             
             {/* Consolidation card */}
-            <div style={{ backgroundColor: 'white', borderRadius: '24px', padding: '40px', border: '1px solid #e5e7eb' }}>
-              <Package style={{ width: '40px', height: '40px', marginBottom: '32px', color: '#06b6d4' }} />
-              <h3 style={{ fontSize: '24px', fontWeight: 700, marginBottom: '8px', color: '#18181b' }}>Order consolidation</h3>
-              <p style={{ color: '#52525b' }}>
+            <div className="bg-white rounded-3xl p-10 border border-gray-200 hover:border-gray-300 hover:shadow-lg transition-all">
+              <Package className="w-10 h-10 mb-8 text-cyan-500" />
+              <h3 className="text-2xl font-bold mb-2 text-zinc-900">Order consolidation</h3>
+              <p className="text-zinc-600">
                 Multiple suppliers, one shipment. Save up to 40% on shipping.
               </p>
             </div>
             
             {/* Customs card */}
-            <div style={{ background: 'linear-gradient(to bottom right, #fef3c7, #ffedd5)', borderRadius: '24px', padding: '40px', border: '1px solid #fde68a' }}>
-              <div style={{ fontSize: '40px', marginBottom: '24px' }}>🛃</div>
-              <h3 style={{ fontSize: '24px', fontWeight: 700, marginBottom: '8px', color: '#18181b' }}>Customs? Handled.</h3>
-              <p style={{ color: '#52525b' }}>
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl p-10 border border-amber-200">
+              <div className="text-4xl mb-6">🛃</div>
+              <h3 className="text-2xl font-bold mb-2 text-zinc-900">Customs? Handled.</h3>
+              <p className="text-zinc-600">
                 We manage all paperwork and clearance. Zero hassle for you.
               </p>
             </div>
@@ -112,28 +130,23 @@ export default function Home() {
       </section>
 
       {/* How it works */}
-      <section id="how" style={{ padding: '96px 24px', backgroundColor: '#f9fafb' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-            <h2 style={{ fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: '16px', color: '#18181b' }}>
+      <section id="how" className="py-24 px-6 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-zinc-900">
               Simple as 1, 2, 3, 4
             </h2>
-            <p style={{ fontSize: '20px', color: '#52525b' }}>No complexity. Just results.</p>
+            <p className="text-xl text-zinc-600">No complexity. Just results.</p>
           </div>
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '32px' }}>
-            {[
-              { num: '01', title: 'Browse', desc: 'Explore 10,000+ products across categories', color: '#8b5cf6' },
-              { num: '02', title: 'Order', desc: 'Pay by card, transfer, or cash on delivery', color: '#3b82f6' },
-              { num: '03', title: 'We ship', desc: 'Consolidation & customs fully handled', color: '#10b981' },
-              { num: '04', title: 'Receive', desc: 'Delivered to your door across Oman', color: '#f59e0b' },
-            ].map((step, i) => (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {steps.map((step, i) => (
               <div key={i}>
-                <div style={{ fontSize: '72px', fontWeight: 900, color: step.color, opacity: 0.3, marginBottom: '16px' }}>
+                <div className={`text-7xl font-black ${step.color} opacity-30 mb-4`}>
                   {step.num}
                 </div>
-                <h3 style={{ fontSize: '20px', fontWeight: 700, marginBottom: '8px', color: '#18181b' }}>{step.title}</h3>
-                <p style={{ color: '#52525b' }}>{step.desc}</p>
+                <h3 className="text-xl font-bold mb-2 text-zinc-900">{step.title}</h3>
+                <p className="text-zinc-600">{step.desc}</p>
               </div>
             ))}
           </div>
@@ -141,51 +154,43 @@ export default function Home() {
       </section>
 
       {/* Categories */}
-      <section id="categories" style={{ padding: '96px 24px' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '48px' }}>
+      <section id="categories" className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
             <div>
-              <h2 style={{ fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: '16px', color: '#18181b' }}>
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-zinc-900">
                 What you can buy
               </h2>
-              <p style={{ fontSize: '20px', color: '#52525b' }}>Everything you need, from UAE to Oman</p>
+              <p className="text-xl text-zinc-600">Everything you need, from UAE to Oman</p>
             </div>
             <Link 
               href="/categories"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#059669', fontWeight: 500, textDecoration: 'none' }}
+              className="inline-flex items-center gap-2 text-emerald-600 hover:text-emerald-700 font-medium transition-colors"
             >
               View all categories
-              <ArrowRight style={{ width: '16px', height: '16px' }} />
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
-            {[
-              { name: 'Electronics', count: '156', image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?w=400&h=300&fit=crop', slug: 'electronics' },
-              { name: 'Tools & Hardware', count: '89', image: 'https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=400&h=300&fit=crop', slug: 'tools' },
-              { name: 'Auto Parts', count: '124', image: 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400&h=300&fit=crop', slug: 'auto' },
-              { name: 'Home & Garden', count: '203', image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop', slug: 'home' },
-              { name: 'Industrial', count: '67', image: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=400&h=300&fit=crop', slug: 'industrial' },
-              { name: 'Office Supplies', count: '145', image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop', slug: 'office' },
-              { name: 'Sports & Fitness', count: '78', image: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?w=400&h=300&fit=crop', slug: 'sports' },
-              { name: 'Health & Safety', count: '92', image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=300&fit=crop', slug: 'health' },
-            ].map((cat, i) => (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {categories.map((cat, i) => (
               <Link 
                 key={i}
                 href={`/categories/${cat.slug}`}
-                style={{ display: 'block', backgroundColor: 'white', border: '1px solid #e5e7eb', borderRadius: '16px', overflow: 'hidden', textDecoration: 'none' }}
+                className="group block bg-white border border-gray-200 hover:border-gray-300 rounded-2xl overflow-hidden transition-all hover:shadow-xl hover:-translate-y-1"
               >
-                <div style={{ aspectRatio: '4/3', position: 'relative', overflow: 'hidden', backgroundColor: '#f4f4f5' }}>
+                <div className="relative w-full h-0 pb-[75%] bg-gray-100 overflow-hidden">
                   <Image
                     src={cat.image}
                     alt={cat.name}
                     fill
-                    style={{ objectFit: 'cover' }}
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <div style={{ padding: '20px' }}>
-                  <div style={{ fontWeight: 600, fontSize: '18px', marginBottom: '4px', color: '#18181b' }}>{cat.name}</div>
-                  <div style={{ color: '#71717a', fontSize: '14px' }}>{cat.count}+ items</div>
+                <div className="p-5">
+                  <div className="font-semibold text-lg mb-1 text-zinc-900 group-hover:text-emerald-600 transition-colors">{cat.name}</div>
+                  <div className="text-zinc-500 text-sm">{cat.count}+ items</div>
                 </div>
               </Link>
             ))}
@@ -194,48 +199,48 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section style={{ padding: '96px 24px' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <div style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(to bottom right, #10b981, #06b6d4)', borderRadius: '40px', padding: '80px' }}>
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="relative overflow-hidden bg-gradient-to-br from-emerald-500 to-cyan-500 rounded-[2.5rem] p-12 md:p-20 shadow-2xl">
             {/* Background decoration */}
-            <div style={{ position: 'absolute', top: '-100px', right: '-100px', width: '400px', height: '400px', backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: '50%', filter: 'blur(60px)' }} />
-            <div style={{ position: 'absolute', bottom: '-100px', left: '-100px', width: '400px', height: '400px', backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: '50%', filter: 'blur(60px)' }} />
+            <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2" />
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/10 blur-3xl rounded-full translate-y-1/2 -translate-x-1/2" />
             
-            <div style={{ position: 'relative' }}>
-              <h2 style={{ fontSize: 'clamp(36px, 6vw, 60px)', fontWeight: 700, color: 'white', letterSpacing: '-0.02em', marginBottom: '24px' }}>
+            <div className="relative">
+              <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight mb-6">
                 Ready to start?
               </h2>
-              <p style={{ fontSize: '20px', color: 'rgba(255,255,255,0.9)', maxWidth: '560px', marginBottom: '40px' }}>
+              <p className="text-xl text-white/90 max-w-xl mb-10">
                 Join thousands of happy customers across Oman. No fees, no minimum orders, no hassle.
               </p>
               
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginBottom: '40px' }}>
+              <div className="flex flex-col sm:flex-row gap-4 mb-10">
                 <Link 
                   href="/signup"
-                  style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px', backgroundColor: 'white', color: '#059669', fontWeight: 600, padding: '16px 32px', borderRadius: '9999px', textDecoration: 'none' }}
+                  className="inline-flex items-center justify-center gap-2 bg-white text-emerald-600 hover:bg-gray-50 font-semibold px-8 py-4 rounded-full transition-colors shadow-lg"
                 >
                   Create Free Account
-                  <ArrowRight style={{ width: '16px', height: '16px' }} />
+                  <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link 
                   href="/products"
-                  style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px', color: 'white', fontWeight: 600, padding: '16px 32px', borderRadius: '9999px', border: '2px solid rgba(255,255,255,0.3)', textDecoration: 'none' }}
+                  className="inline-flex items-center justify-center gap-2 text-white font-semibold px-8 py-4 rounded-full border-2 border-white/30 hover:border-white/50 hover:bg-white/10 transition-colors"
                 >
                   Browse Products
                 </Link>
               </div>
               
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '24px', color: 'rgba(255,255,255,0.9)', fontSize: '14px' }}>
-                <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Check style={{ width: '20px', height: '20px' }} />
+              <div className="flex flex-wrap gap-6 text-white/90 text-sm">
+                <span className="flex items-center gap-2">
+                  <Check className="w-5 h-5" />
                   No membership fees
                 </span>
-                <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Check style={{ width: '20px', height: '20px' }} />
+                <span className="flex items-center gap-2">
+                  <Check className="w-5 h-5" />
                   Cash on delivery
                 </span>
-                <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Check style={{ width: '20px', height: '20px' }} />
+                <span className="flex items-center gap-2">
+                  <Check className="w-5 h-5" />
                   7-day free returns
                 </span>
               </div>

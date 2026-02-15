@@ -76,7 +76,7 @@ export default function CheckoutPage() {
           {/* Back link */}
           <Link
             href="/cart"
-            className="inline-flex items-center gap-2 text-zinc-600 hover:text-zinc-200 mb-8"
+            className="inline-flex items-center gap-2 text-zinc-600 hover:text-zinc-900 mb-8"
           >
             <ChevronLeft className="w-4 h-4" />
             Back to cart
@@ -203,7 +203,7 @@ export default function CheckoutPage() {
                     className={`flex items-center gap-4 p-4 rounded-xl border cursor-pointer transition-colors ${
                       paymentMethod === 'card'
                         ? 'bg-emerald-500/10 border-emerald-500'
-                        : 'bg-gray-50 border-gray-200 hover:border-zinc-700'
+                        : 'bg-gray-50 border-gray-200 hover:border-gray-300'
                     }`}
                   >
                     <input
@@ -214,19 +214,19 @@ export default function CheckoutPage() {
                       onChange={() => setPaymentMethod('card')}
                       className="sr-only"
                     />
-                    <CreditCard className="w-5 h-5 text-emerald-400" />
+                    <CreditCard className="w-5 h-5 text-emerald-600" />
                     <div className="flex-1">
                       <p className="font-medium">Credit / Debit Card</p>
                       <p className="text-sm text-zinc-500">Visa, Mastercard, AMEX</p>
                     </div>
-                    {paymentMethod === 'card' && <Check className="w-5 h-5 text-emerald-400" />}
+                    {paymentMethod === 'card' && <Check className="w-5 h-5 text-emerald-600" />}
                   </label>
 
                   <label
                     className={`flex items-center gap-4 p-4 rounded-xl border cursor-pointer transition-colors ${
                       paymentMethod === 'cod'
                         ? 'bg-emerald-500/10 border-emerald-500'
-                        : 'bg-gray-50 border-gray-200 hover:border-zinc-700'
+                        : 'bg-gray-50 border-gray-200 hover:border-gray-300'
                     }`}
                   >
                     <input
@@ -237,19 +237,19 @@ export default function CheckoutPage() {
                       onChange={() => setPaymentMethod('cod')}
                       className="sr-only"
                     />
-                    <Banknote className="w-5 h-5 text-emerald-400" />
+                    <Banknote className="w-5 h-5 text-emerald-600" />
                     <div className="flex-1">
                       <p className="font-medium">Cash on Delivery</p>
                       <p className="text-sm text-zinc-500">Pay when you receive</p>
                     </div>
-                    {paymentMethod === 'cod' && <Check className="w-5 h-5 text-emerald-400" />}
+                    {paymentMethod === 'cod' && <Check className="w-5 h-5 text-emerald-600" />}
                   </label>
 
                   <label
                     className={`flex items-center gap-4 p-4 rounded-xl border cursor-pointer transition-colors ${
                       paymentMethod === 'bank'
                         ? 'bg-emerald-500/10 border-emerald-500'
-                        : 'bg-gray-50 border-gray-200 hover:border-zinc-700'
+                        : 'bg-gray-50 border-gray-200 hover:border-gray-300'
                     }`}
                   >
                     <input
@@ -260,12 +260,12 @@ export default function CheckoutPage() {
                       onChange={() => setPaymentMethod('bank')}
                       className="sr-only"
                     />
-                    <Building2 className="w-5 h-5 text-emerald-400" />
+                    <Building2 className="w-5 h-5 text-emerald-600" />
                     <div className="flex-1">
                       <p className="font-medium">Bank Transfer</p>
                       <p className="text-sm text-zinc-500">Direct bank payment</p>
                     </div>
-                    {paymentMethod === 'bank' && <Check className="w-5 h-5 text-emerald-400" />}
+                    {paymentMethod === 'bank' && <Check className="w-5 h-5 text-emerald-600" />}
                   </label>
                 </div>
 
@@ -350,7 +350,7 @@ export default function CheckoutPage() {
                           fill
                           className="object-cover"
                         />
-                        <span className="absolute -top-1 -right-1 w-5 h-5 bg-zinc-700 text-xs font-semibold rounded-full flex items-center justify-center">
+                        <span className="absolute -top-1 -right-1 w-5 h-5 bg-emerald-500 text-xs font-semibold rounded-full flex items-center justify-center">
                           {item.quantity}
                         </span>
                       </div>
@@ -370,22 +370,22 @@ export default function CheckoutPage() {
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-zinc-600">Shipping</span>
-                    <span>{shipping === 0 ? <span className="text-emerald-400">Free</span> : `$${shipping.toFixed(2)}`}</span>
+                    <span>{shipping === 0 ? <span className="text-emerald-600">Free</span> : `$${shipping.toFixed(2)}`}</span>
                   </div>
                   <div className="flex justify-between text-lg font-semibold pt-3 border-t border-gray-200">
                     <span>Total</span>
-                    <span className="text-emerald-400">${total.toFixed(2)}</span>
+                    <span className="text-emerald-600">${total.toFixed(2)}</span>
                   </div>
                 </div>
 
                 {/* Trust badges */}
                 <div className="mt-6 pt-6 border-t border-gray-200 space-y-3">
                   <div className="flex items-center gap-3 text-sm text-zinc-600">
-                    <Lock className="w-4 h-4 text-emerald-400" />
+                    <Lock className="w-4 h-4 text-emerald-600" />
                     <span>Secure SSL encrypted checkout</span>
                   </div>
                   <div className="flex items-center gap-3 text-sm text-zinc-600">
-                    <Truck className="w-4 h-4 text-emerald-400" />
+                    <Truck className="w-4 h-4 text-emerald-600" />
                     <span>Delivery in 2-4 business days</span>
                   </div>
                 </div>
