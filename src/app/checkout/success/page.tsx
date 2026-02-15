@@ -9,7 +9,7 @@ export default function CheckoutSuccessPage() {
   const orderNumber = `GM${Date.now().toString().slice(-8)}`
 
   return (
-    <div className="min-h-screen bg-[#0a0a0b] text-zinc-100">
+    <div className="min-h-screen bg-white text-zinc-900">
       <Header />
 
       <main className="pt-32 pb-20 px-6">
@@ -20,32 +20,32 @@ export default function CheckoutSuccessPage() {
           </div>
 
           <h1 className="text-3xl font-bold mb-4">Order Confirmed!</h1>
-          <p className="text-zinc-400 mb-8">
+          <p className="text-zinc-600 mb-8">
             Thank you for your order. We've received your purchase and will start processing it right away.
           </p>
 
           {/* Order Number */}
-          <div className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6 mb-8">
+          <div className="bg-gray-50/50 border border-gray-200 rounded-2xl p-6 mb-8">
             <p className="text-sm text-zinc-500 mb-1">Order Number</p>
             <p className="text-2xl font-mono font-bold text-emerald-400">{orderNumber}</p>
           </div>
 
           {/* What's Next */}
           <div className="space-y-4 mb-10">
-            <div className="flex items-start gap-4 text-left bg-zinc-900/30 border border-zinc-800/50 rounded-xl p-4">
+            <div className="flex items-start gap-4 text-left bg-gray-50/30 border border-gray-200/50 rounded-xl p-4">
               <Mail className="w-5 h-5 text-emerald-400 mt-0.5" />
               <div>
                 <p className="font-medium mb-1">Confirmation Email</p>
-                <p className="text-sm text-zinc-400">
+                <p className="text-sm text-zinc-600">
                   We've sent order details to your email address
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-4 text-left bg-zinc-900/30 border border-zinc-800/50 rounded-xl p-4">
+            <div className="flex items-start gap-4 text-left bg-gray-50/30 border border-gray-200/50 rounded-xl p-4">
               <Package className="w-5 h-5 text-emerald-400 mt-0.5" />
               <div>
                 <p className="font-medium mb-1">Delivery in 2-4 Days</p>
-                <p className="text-sm text-zinc-400">
+                <p className="text-sm text-zinc-600">
                   We'll notify you when your order ships from UAE
                 </p>
               </div>

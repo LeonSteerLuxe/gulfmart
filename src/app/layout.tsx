@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="bg-[#0a0a0b] text-zinc-100 antialiased">
+      <body className="bg-white text-zinc-900 antialiased">
         <CartProvider>
           {children}
           <CartDrawer />

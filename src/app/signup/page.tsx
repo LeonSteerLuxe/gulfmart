@@ -38,7 +38,7 @@ export default function SignupPage() {
   const strength = passwordStrength()
 
   return (
-    <div className="min-h-screen bg-[#0a0a0b] text-zinc-100">
+    <div className="min-h-screen bg-white text-zinc-900">
       <Header />
 
       <main className="pt-32 pb-20 px-6">
@@ -46,13 +46,13 @@ export default function SignupPage() {
           {/* Header */}
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold mb-2">Create an account</h1>
-            <p className="text-zinc-400">
+            <p className="text-zinc-600">
               Join GulfMart and start shopping UAE products
             </p>
           </div>
 
           {/* Benefits */}
-          <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-4 mb-8">
+          <div className="bg-gray-50/50 border border-gray-200 rounded-xl p-4 mb-8">
             <div className="space-y-2">
               {[
                 'Access to 10,000+ UAE products',
@@ -60,7 +60,7 @@ export default function SignupPage() {
                 'Exclusive member discounts',
                 'Free shipping on orders over $50',
               ].map((benefit, i) => (
-                <div key={i} className="flex items-center gap-2 text-sm text-zinc-400">
+                <div key={i} className="flex items-center gap-2 text-sm text-zinc-600">
                   <Check className="w-4 h-4 text-emerald-400" />
                   {benefit}
                 </div>
@@ -71,7 +71,7 @@ export default function SignupPage() {
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm text-zinc-400 mb-2">Full Name</label>
+              <label className="block text-sm text-zinc-600 mb-2">Full Name</label>
               <div className="relative">
                 <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" />
                 <input
@@ -79,14 +79,14 @@ export default function SignupPage() {
                   required
                   value={formData.name}
                   onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                  className="w-full bg-zinc-900 border border-zinc-800 rounded-xl py-3.5 pl-12 pr-4 focus:outline-none focus:border-emerald-500 transition-colors"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl py-3.5 pl-12 pr-4 focus:outline-none focus:border-emerald-500 transition-colors"
                   placeholder="John Doe"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm text-zinc-400 mb-2">Email</label>
+              <label className="block text-sm text-zinc-600 mb-2">Email</label>
               <div className="relative">
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" />
                 <input
@@ -94,14 +94,14 @@ export default function SignupPage() {
                   required
                   value={formData.email}
                   onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                  className="w-full bg-zinc-900 border border-zinc-800 rounded-xl py-3.5 pl-12 pr-4 focus:outline-none focus:border-emerald-500 transition-colors"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl py-3.5 pl-12 pr-4 focus:outline-none focus:border-emerald-500 transition-colors"
                   placeholder="you@example.com"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm text-zinc-400 mb-2">Password</label>
+              <label className="block text-sm text-zinc-600 mb-2">Password</label>
               <div className="relative">
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" />
                 <input
@@ -109,7 +109,7 @@ export default function SignupPage() {
                   required
                   value={formData.password}
                   onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
-                  className="w-full bg-zinc-900 border border-zinc-800 rounded-xl py-3.5 pl-12 pr-12 focus:outline-none focus:border-emerald-500 transition-colors"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl py-3.5 pl-12 pr-12 focus:outline-none focus:border-emerald-500 transition-colors"
                   placeholder="••••••••"
                 />
                 <button
@@ -129,7 +129,7 @@ export default function SignupPage() {
                       <div
                         key={level}
                         className={`h-1 flex-1 rounded-full ${
-                          level <= strength.score ? strength.color : 'bg-zinc-800'
+                          level <= strength.score ? strength.color : 'bg-gray-100'
                         }`}
                       />
                     ))}
@@ -145,9 +145,9 @@ export default function SignupPage() {
               <input
                 type="checkbox"
                 required
-                className="w-4 h-4 mt-0.5 rounded border-zinc-700 bg-zinc-900 text-emerald-500 focus:ring-emerald-500"
+                className="w-4 h-4 mt-0.5 rounded border-zinc-700 bg-gray-50 text-emerald-500 focus:ring-emerald-500"
               />
-              <span className="text-sm text-zinc-400">
+              <span className="text-sm text-zinc-600">
                 I agree to the{' '}
                 <Link href="/terms" className="text-emerald-400 hover:text-emerald-300">Terms of Service</Link>
                 {' '}and{' '}
@@ -173,14 +173,14 @@ export default function SignupPage() {
 
           {/* Divider */}
           <div className="flex items-center gap-4 my-8">
-            <div className="flex-1 h-px bg-zinc-800" />
+            <div className="flex-1 h-px bg-gray-100" />
             <span className="text-sm text-zinc-500">or sign up with</span>
-            <div className="flex-1 h-px bg-zinc-800" />
+            <div className="flex-1 h-px bg-gray-100" />
           </div>
 
           {/* Social Login */}
           <div className="grid grid-cols-2 gap-4 mb-8">
-            <button className="flex items-center justify-center gap-2 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 py-3 rounded-xl transition-colors">
+            <button className="flex items-center justify-center gap-2 bg-gray-50 border border-gray-200 hover:border-zinc-700 py-3 rounded-xl transition-colors">
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                 <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -189,7 +189,7 @@ export default function SignupPage() {
               </svg>
               Google
             </button>
-            <button className="flex items-center justify-center gap-2 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 py-3 rounded-xl transition-colors">
+            <button className="flex items-center justify-center gap-2 bg-gray-50 border border-gray-200 hover:border-zinc-700 py-3 rounded-xl transition-colors">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
               </svg>
@@ -198,7 +198,7 @@ export default function SignupPage() {
           </div>
 
           {/* Login Link */}
-          <p className="text-center text-zinc-400">
+          <p className="text-center text-zinc-600">
             Already have an account?{' '}
             <Link href="/login" className="text-emerald-400 hover:text-emerald-300 font-medium">
               Sign in
