@@ -1,29 +1,24 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import { categories } from '@/lib/data';
-import { ArrowRight } from 'lucide-react';
+'use client'
 
-export const metadata = {
-  title: 'Categories - GulfMart',
-  description: 'Browse all product categories on GulfMart',
-};
+import Image from 'next/image'
+import Link from 'next/link'
+import { Header } from '@/components/Header'
+import { Footer } from '@/components/Footer'
+import { categories } from '@/lib/products'
+import { ArrowRight } from 'lucide-react'
 
 export default function CategoriesPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#0a0a0b] text-zinc-100">
       <Header />
-      
-      <main className="pt-24 pb-16 px-6">
+
+      <main className="pt-24 pb-20 px-6">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className="mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-              All Categories
-            </h1>
-            <p className="text-xl text-zinc-500">
-              Explore 10,000+ products across {categories.length} categories
+          <div className="text-center mb-12">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Shop by Category</h1>
+            <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
+              Browse our curated collection of products from verified UAE suppliers
             </p>
           </div>
 
@@ -32,31 +27,30 @@ export default function CategoriesPage() {
             {categories.map((category) => (
               <Link
                 key={category.id}
-                href={`/products?category=${category.slug}`}
-                className="group relative bg-white border border-zinc-200 hover:border-zinc-300 rounded-3xl overflow-hidden transition-all hover:shadow-xl hover:shadow-zinc-200/50"
+                href={`/categories/${category.slug}`}
+                className="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-zinc-900"
               >
-                {/* Image */}
-                <div className="aspect-[16/9] relative overflow-hidden">
-                  <Image
-                    src={category.image}
-                    alt={category.name}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  
-                  {/* Content Overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                    <h2 className="text-2xl font-bold mb-1">{category.name}</h2>
-                    <p className="text-white/80 text-sm mb-3">{category.description}</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium bg-white/20 backdrop-blur px-3 py-1 rounded-full">
-                        {category.productCount.toLocaleString()}+ products
+                <Image
+                  src={category.image}
+                  alt={category.name}
+                  fill
+                  className="object-cover opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                
+                <div className="absolute inset-0 p-6 flex flex-col justify-end">
+                  <div className="flex items-end justify-between">
+                    <div>
+                      <h2 className="text-2xl font-bold mb-1 group-hover:text-emerald-400 transition-colors">
+                        {category.name}
+                      </h2>
+                      <p className="text-zinc-400 text-sm mb-2">{category.description}</p>
+                      <span className="text-sm text-emerald-400 font-medium">
+                        {category.count}+ products
                       </span>
-                      <span className="flex items-center gap-1 text-sm font-medium group-hover:gap-2 transition-all">
-                        Browse
-                        <ArrowRight className="w-4 h-4" />
-                      </span>
+                    </div>
+                    <div className="p-3 bg-white/10 backdrop-blur-sm rounded-full group-hover:bg-emerald-500 transition-colors">
+                      <ArrowRight className="w-5 h-5" />
                     </div>
                   </div>
                 </div>
@@ -64,29 +58,21 @@ export default function CategoriesPage() {
             ))}
           </div>
 
-          {/* Stats Section */}
-          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="text-center p-6 bg-zinc-50 rounded-2xl">
-              <div className="text-3xl font-bold text-emerald-600 mb-1">10,000+</div>
-              <div className="text-sm text-zinc-500">Products</div>
-            </div>
-            <div className="text-center p-6 bg-zinc-50 rounded-2xl">
-              <div className="text-3xl font-bold text-emerald-600 mb-1">500+</div>
-              <div className="text-sm text-zinc-500">Verified Suppliers</div>
-            </div>
-            <div className="text-center p-6 bg-zinc-50 rounded-2xl">
-              <div className="text-3xl font-bold text-emerald-600 mb-1">2-4 days</div>
-              <div className="text-sm text-zinc-500">Average Delivery</div>
-            </div>
-            <div className="text-center p-6 bg-zinc-50 rounded-2xl">
-              <div className="text-3xl font-bold text-emerald-600 mb-1">100%</div>
-              <div className="text-sm text-zinc-500">Buyer Protection</div>
-            </div>
+          {/* CTA */}
+          <div className="mt-16 text-center">
+            <p className="text-zinc-400 mb-4">Can't find what you're looking for?</p>
+            <Link
+              href="/products"
+              className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-8 py-3 rounded-full transition-colors"
+            >
+              Browse All Products
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </main>
 
       <Footer />
     </div>
-  );
+  )
 }

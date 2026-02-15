@@ -1,83 +1,69 @@
-import Link from 'next/link';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import { CheckCircle, Package, Truck, Mail, ArrowRight } from 'lucide-react';
+'use client'
 
-export const metadata = {
-  title: 'Order Confirmed - GulfMart',
-};
+import Link from 'next/link'
+import { Header } from '@/components/Header'
+import { Footer } from '@/components/Footer'
+import { CheckCircle, Package, Mail, ArrowRight } from 'lucide-react'
 
 export default function CheckoutSuccessPage() {
-  const orderNumber = `GM-${Date.now().toString(36).toUpperCase()}`;
+  const orderNumber = `GM${Date.now().toString().slice(-8)}`
 
   return (
-    <div className="min-h-screen bg-zinc-50">
+    <div className="min-h-screen bg-[#0a0a0b] text-zinc-100">
       <Header />
-      
-      <main className="pt-32 pb-16 px-6">
-        <div className="max-w-2xl mx-auto text-center">
+
+      <main className="pt-32 pb-20 px-6">
+        <div className="max-w-lg mx-auto text-center">
           {/* Success Icon */}
-          <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle className="w-10 h-10 text-emerald-500" />
+          <div className="w-20 h-20 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-8">
+            <CheckCircle className="w-10 h-10 text-emerald-400" />
           </div>
 
           <h1 className="text-3xl font-bold mb-4">Order Confirmed!</h1>
-          <p className="text-zinc-500 mb-2">
-            Thank you for your order. We&apos;ve received it and will start processing right away.
-          </p>
-          <p className="text-lg font-medium mb-8">
-            Order Number: <span className="text-emerald-600">{orderNumber}</span>
+          <p className="text-zinc-400 mb-8">
+            Thank you for your order. We've received your purchase and will start processing it right away.
           </p>
 
-          {/* Order Timeline */}
-          <div className="bg-white rounded-2xl p-8 border border-zinc-200 mb-8">
-            <h2 className="font-semibold mb-6">What happens next?</h2>
-            
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center shrink-0">
-                  <Mail className="w-5 h-5 text-emerald-600" />
-                </div>
-                <div className="text-left">
-                  <div className="font-medium">Confirmation Email</div>
-                  <div className="text-sm text-zinc-500">You&apos;ll receive an order confirmation email shortly</div>
-                </div>
-              </div>
+          {/* Order Number */}
+          <div className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6 mb-8">
+            <p className="text-sm text-zinc-500 mb-1">Order Number</p>
+            <p className="text-2xl font-mono font-bold text-emerald-400">{orderNumber}</p>
+          </div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-zinc-100 rounded-full flex items-center justify-center shrink-0">
-                  <Package className="w-5 h-5 text-zinc-600" />
-                </div>
-                <div className="text-left">
-                  <div className="font-medium">Order Processing</div>
-                  <div className="text-sm text-zinc-500">We&apos;ll consolidate and prepare your items in UAE</div>
-                </div>
+          {/* What's Next */}
+          <div className="space-y-4 mb-10">
+            <div className="flex items-start gap-4 text-left bg-zinc-900/30 border border-zinc-800/50 rounded-xl p-4">
+              <Mail className="w-5 h-5 text-emerald-400 mt-0.5" />
+              <div>
+                <p className="font-medium mb-1">Confirmation Email</p>
+                <p className="text-sm text-zinc-400">
+                  We've sent order details to your email address
+                </p>
               </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-zinc-100 rounded-full flex items-center justify-center shrink-0">
-                  <Truck className="w-5 h-5 text-zinc-600" />
-                </div>
-                <div className="text-left">
-                  <div className="font-medium">Shipping & Delivery</div>
-                  <div className="text-sm text-zinc-500">Your order will arrive in 2-4 business days</div>
-                </div>
+            </div>
+            <div className="flex items-start gap-4 text-left bg-zinc-900/30 border border-zinc-800/50 rounded-xl p-4">
+              <Package className="w-5 h-5 text-emerald-400 mt-0.5" />
+              <div>
+                <p className="font-medium mb-1">Delivery in 2-4 Days</p>
+                <p className="text-sm text-zinc-400">
+                  We'll notify you when your order ships from UAE
+                </p>
               </div>
             </div>
           </div>
 
           {/* Actions */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
+            <Link
               href="/products"
-              className="inline-flex items-center justify-center gap-2 bg-zinc-900 text-white px-8 py-4 rounded-full font-medium hover:bg-zinc-800 transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-8 py-3 rounded-full transition-colors"
             >
               Continue Shopping
               <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link 
+            <Link
               href="/"
-              className="inline-flex items-center justify-center px-8 py-4 border border-zinc-300 rounded-full font-medium hover:bg-zinc-50 transition-colors"
+              className="inline-flex items-center justify-center gap-2 border border-zinc-700 hover:border-zinc-600 text-zinc-300 font-semibold px-8 py-3 rounded-full transition-colors"
             >
               Back to Home
             </Link>
@@ -87,5 +73,5 @@ export default function CheckoutSuccessPage() {
 
       <Footer />
     </div>
-  );
+  )
 }

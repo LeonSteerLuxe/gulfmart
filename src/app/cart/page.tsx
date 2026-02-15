@@ -1,226 +1,172 @@
-'use client';
+'use client'
 
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import { getCart, updateQuantity, removeFromCart, CartItem } from '@/lib/cart';
-import { Minus, Plus, Trash2, ShoppingBag, ArrowRight, Truck, Shield, Tag } from 'lucide-react';
+import Image from 'next/image'
+import Link from 'next/link'
+import { Header } from '@/components/Header'
+import { Footer } from '@/components/Footer'
+import { useCart } from '@/lib/cart-context'
+import { Minus, Plus, Trash2, ShoppingBag, ArrowRight, Truck } from 'lucide-react'
 
 export default function CartPage() {
-  const [cart, setCart] = useState<CartItem[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setCart(getCart());
-    setLoading(false);
-
-    const handleCartUpdate = () => {
-      setCart(getCart());
-    };
-
-    window.addEventListener('cart-updated', handleCartUpdate);
-    return () => window.removeEventListener('cart-updated', handleCartUpdate);
-  }, []);
-
-  const handleUpdateQuantity = (productId: string, newQuantity: number) => {
-    updateQuantity(productId, newQuantity);
-  };
-
-  const handleRemove = (productId: string) => {
-    removeFromCart(productId);
-  };
-
-  const subtotal = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
-  const shipping = subtotal > 100 ? 0 : 15;
-  const total = subtotal + shipping;
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-zinc-50">
-        <Header />
-        <main className="pt-32 pb-16 px-6 flex items-center justify-center">
-          <div className="animate-pulse">Loading...</div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
-
-  if (cart.length === 0) {
-    return (
-      <div className="min-h-screen bg-zinc-50">
-        <Header />
-        <main className="pt-32 pb-16 px-6">
-          <div className="max-w-2xl mx-auto text-center">
-            <div className="w-24 h-24 bg-zinc-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <ShoppingBag className="w-12 h-12 text-zinc-400" />
-            </div>
-            <h1 className="text-3xl font-bold mb-4">Your cart is empty</h1>
-            <p className="text-zinc-500 mb-8">
-              Looks like you haven&apos;t added anything to your cart yet.
-            </p>
-            <Link 
-              href="/products"
-              className="inline-flex items-center gap-2 bg-zinc-900 text-white px-8 py-4 rounded-full font-medium hover:bg-zinc-800 transition-colors"
-            >
-              Start Shopping
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
+  const { items, updateQuantity, removeItem, subtotal, shipping, total, itemCount } = useCart()
 
   return (
-    <div className="min-h-screen bg-zinc-50">
+    <div className="min-h-screen bg-[#0a0a0b] text-zinc-100">
       <Header />
-      
-      <main className="pt-24 pb-16 px-6">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-bold mb-8">Shopping Cart</h1>
 
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Cart Items */}
-            <div className="lg:col-span-2 space-y-4">
-              {cart.map((item) => (
-                <div 
-                  key={item.product.id}
-                  className="bg-white rounded-2xl p-6 border border-zinc-200 flex gap-6"
-                >
-                  {/* Image */}
-                  <Link href={`/products/${item.product.id}`} className="shrink-0">
-                    <div className="w-24 h-24 md:w-32 md:h-32 relative rounded-xl overflow-hidden bg-zinc-100">
-                      <Image
-                        src={item.product.image}
-                        alt={item.product.name}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  </Link>
+      <main className="pt-24 pb-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <h1 className="text-3xl font-bold mb-8">Shopping Cart</h1>
 
-                  {/* Details */}
-                  <div className="flex-1 min-w-0">
-                    <Link href={`/products/${item.product.id}`}>
-                      <h3 className="font-semibold text-lg mb-1 hover:text-emerald-600 transition-colors line-clamp-1">
-                        {item.product.name}
-                      </h3>
-                    </Link>
-                    <p className="text-sm text-zinc-500 mb-2">{item.product.seller}</p>
-                    
-                    <div className="flex items-center gap-2 text-sm text-emerald-600 mb-4">
-                      <Truck className="w-4 h-4" />
-                      <span>{item.product.deliveryDays} days delivery</span>
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      {/* Quantity */}
-                      <div className="flex items-center border border-zinc-200 rounded-lg">
-                        <button 
-                          onClick={() => handleUpdateQuantity(item.product.id, item.quantity - 1)}
-                          className="p-2 hover:bg-zinc-50 transition-colors"
-                        >
-                          <Minus className="w-4 h-4" />
-                        </button>
-                        <span className="px-3 font-medium">{item.quantity}</span>
-                        <button 
-                          onClick={() => handleUpdateQuantity(item.product.id, item.quantity + 1)}
-                          className="p-2 hover:bg-zinc-50 transition-colors"
-                        >
-                          <Plus className="w-4 h-4" />
-                        </button>
+          {items.length === 0 ? (
+            <div className="text-center py-20">
+              <ShoppingBag className="w-16 h-16 text-zinc-700 mx-auto mb-4" />
+              <h2 className="text-xl font-semibold mb-2">Your cart is empty</h2>
+              <p className="text-zinc-400 mb-8">Looks like you haven't added any products yet</p>
+              <Link
+                href="/products"
+                className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-8 py-3 rounded-full transition-colors"
+              >
+                Start Shopping
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          ) : (
+            <div className="grid lg:grid-cols-3 gap-8">
+              {/* Cart Items */}
+              <div className="lg:col-span-2 space-y-4">
+                {items.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex gap-6 bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6"
+                  >
+                    <Link href={`/products/${item.id}`} className="flex-shrink-0">
+                      <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-xl overflow-hidden bg-zinc-800">
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          fill
+                          className="object-cover"
+                        />
                       </div>
-
-                      {/* Price & Remove */}
-                      <div className="flex items-center gap-4">
-                        <span className="text-xl font-bold">
-                          ${(item.product.price * item.quantity).toFixed(2)}
-                        </span>
+                    </Link>
+                    
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between gap-4 mb-2">
+                        <div>
+                          <Link href={`/products/${item.id}`}>
+                            <h3 className="font-semibold hover:text-emerald-400 transition-colors">
+                              {item.name}
+                            </h3>
+                          </Link>
+                          {item.supplier && (
+                            <p className="text-sm text-zinc-500">{item.supplier}</p>
+                          )}
+                        </div>
                         <button
-                          onClick={() => handleRemove(item.product.id)}
-                          className="p-2 text-zinc-400 hover:text-red-500 transition-colors"
+                          onClick={() => removeItem(item.id)}
+                          className="p-2 text-zinc-500 hover:text-red-400 transition-colors"
                         >
                           <Trash2 className="w-5 h-5" />
                         </button>
                       </div>
+
+                      <div className="flex items-end justify-between mt-4">
+                        <div className="flex items-center gap-3 bg-zinc-800 rounded-full">
+                          <button
+                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                            className="p-2 hover:bg-zinc-700 rounded-full transition-colors"
+                          >
+                            <Minus className="w-4 h-4" />
+                          </button>
+                          <span className="w-8 text-center font-medium">{item.quantity}</span>
+                          <button
+                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                            className="p-2 hover:bg-zinc-700 rounded-full transition-colors"
+                          >
+                            <Plus className="w-4 h-4" />
+                          </button>
+                        </div>
+                        
+                        <div className="text-right">
+                          <p className="text-xl font-bold text-emerald-400">
+                            ${(item.price * item.quantity).toFixed(2)}
+                          </p>
+                          <p className="text-sm text-zinc-500">
+                            ${item.price.toFixed(2)} each
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
 
-            {/* Order Summary */}
-            <div className="lg:col-span-1">
-              <div className="bg-white rounded-2xl p-6 border border-zinc-200 sticky top-24">
-                <h2 className="text-xl font-bold mb-6">Order Summary</h2>
+              {/* Order Summary */}
+              <div className="lg:col-span-1">
+                <div className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6 sticky top-24">
+                  <h2 className="text-lg font-semibold mb-6">Order Summary</h2>
+                  
+                  <div className="space-y-3 mb-6">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-zinc-400">Subtotal ({itemCount} items)</span>
+                      <span>${subtotal.toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-zinc-400">Shipping</span>
+                      <span>
+                        {shipping === 0 ? (
+                          <span className="text-emerald-400">Free</span>
+                        ) : (
+                          `$${shipping.toFixed(2)}`
+                        )}
+                      </span>
+                    </div>
+                    {shipping > 0 && subtotal < 50 && (
+                      <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-3">
+                        <p className="text-sm text-emerald-400">
+                          Add ${(50 - subtotal).toFixed(2)} more for free shipping!
+                        </p>
+                      </div>
+                    )}
+                  </div>
 
-                {/* Promo Code */}
-                <div className="flex gap-2 mb-6">
-                  <div className="flex-1 relative">
-                    <Tag className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
-                    <input
-                      type="text"
-                      placeholder="Promo code"
-                      className="w-full pl-10 pr-4 py-3 border border-zinc-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
-                    />
-                  </div>
-                  <button className="px-4 py-3 bg-zinc-100 rounded-xl font-medium text-sm hover:bg-zinc-200 transition-colors">
-                    Apply
-                  </button>
-                </div>
-
-                {/* Summary */}
-                <div className="space-y-3 mb-6">
-                  <div className="flex justify-between text-zinc-600">
-                    <span>Subtotal ({cart.reduce((sum, item) => sum + item.quantity, 0)} items)</span>
-                    <span>${subtotal.toFixed(2)}</span>
-                  </div>
-                  <div className="flex justify-between text-zinc-600">
-                    <span>Shipping</span>
-                    <span>{shipping === 0 ? <span className="text-emerald-600">Free</span> : `$${shipping.toFixed(2)}`}</span>
-                  </div>
-                  {shipping > 0 && (
-                    <p className="text-xs text-zinc-400">
-                      Free shipping on orders over $100
-                    </p>
-                  )}
-                  <div className="border-t border-zinc-200 pt-3 flex justify-between font-bold text-lg">
+                  <div className="flex justify-between text-lg font-semibold pt-4 border-t border-zinc-800 mb-6">
                     <span>Total</span>
-                    <span>${total.toFixed(2)}</span>
+                    <span className="text-emerald-400">${total.toFixed(2)}</span>
                   </div>
-                </div>
 
-                {/* Checkout Button */}
-                <Link
-                  href="/checkout"
-                  className="w-full flex items-center justify-center gap-2 bg-zinc-900 text-white py-4 rounded-xl font-medium hover:bg-zinc-800 transition-colors"
-                >
-                  Proceed to Checkout
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
+                  <Link
+                    href="/checkout"
+                    className="flex items-center justify-center gap-2 w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-4 rounded-full transition-colors mb-4"
+                  >
+                    Proceed to Checkout
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
 
-                {/* Trust Badges */}
-                <div className="mt-6 pt-6 border-t border-zinc-200 space-y-3">
-                  <div className="flex items-center gap-3 text-sm text-zinc-600">
-                    <Shield className="w-5 h-5 text-emerald-500" />
-                    <span>Buyer protection on all orders</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-sm text-zinc-600">
-                    <Truck className="w-5 h-5 text-emerald-500" />
-                    <span>Fast delivery to Oman</span>
+                  <Link
+                    href="/products"
+                    className="block text-center text-sm text-zinc-400 hover:text-zinc-300 transition-colors"
+                  >
+                    Continue Shopping
+                  </Link>
+
+                  {/* Shipping info */}
+                  <div className="mt-6 pt-6 border-t border-zinc-800 flex items-start gap-3">
+                    <Truck className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
+                    <div className="text-sm text-zinc-400">
+                      <p className="font-medium text-zinc-300 mb-1">Delivery to Oman</p>
+                      <p>2-4 business days from UAE. Customs handled.</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </main>
 
       <Footer />
     </div>
-  );
+  )
 }
