@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, Package, Truck, Shield, Check, Sparkles } from 'lucide-react'
+import { ArrowRight, Package, Truck, Shield, Check, Sparkles, ShieldCheck, FileCheck, CreditCard, Star } from 'lucide-react'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 
@@ -22,49 +22,91 @@ const steps = [
   { num: '04', title: 'Receive', desc: 'Delivered to your door across Oman', color: 'text-amber-500' },
 ]
 
+const testimonials = [
+  { name: 'Ahmed K.', location: 'Muscat', text: 'Finally I can order from Dubai without the customs nightmare. GulfMart handles everything!', rating: 5 },
+  { name: 'Fatima S.', location: 'Sohar', text: 'Ordered tools for my business - arrived in 3 days. Cash on delivery made it risk-free.', rating: 5 },
+  { name: 'Mohammed R.', location: 'Salalah', text: 'The consolidation saved me 400 OMR on shipping. Will use again for sure.', rating: 5 },
+]
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-white text-zinc-900">
+      {/* Promo Banner */}
+      <div className="bg-gradient-to-r from-emerald-600 to-cyan-600 text-white text-center py-2.5 px-4">
+        <p className="text-sm font-medium">
+          🎉 <span className="font-bold">15% OFF</span> your first order — Use code <span className="font-mono bg-white/20 px-2 py-0.5 rounded">OMAN15</span> at checkout
+        </p>
+      </div>
+
       <Header />
 
       {/* Hero */}
-      <section className="pt-36 pb-20 px-6 bg-gradient-to-b from-emerald-50/50 to-white">
+      <section className="pt-32 pb-20 px-6 bg-gradient-to-b from-emerald-50/50 to-white">
         <div className="max-w-7xl mx-auto">
           <div className="max-w-4xl">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 bg-emerald-100 border border-emerald-200 rounded-full px-4 py-1.5 mb-8">
               <Sparkles className="w-4 h-4 text-emerald-600" />
-              <span className="text-sm font-medium text-emerald-700">Now delivering to all of Oman</span>
+              <span className="text-sm font-medium text-emerald-700">Trusted by 5,000+ Omani shoppers</span>
             </div>
             
             {/* Headline */}
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none mb-8">
-              Shop UAE.
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none mb-6">
+              Shop UAE
               <br />
               <span className="bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent">
-                Delivered to Oman.
+                Like It&apos;s Local.
               </span>
             </h1>
-            
-            <p className="text-xl md:text-2xl text-zinc-600 leading-relaxed max-w-2xl mb-10">
-              10,000+ products from verified UAE suppliers. We handle customs, consolidation, and delivery to your door.
+
+            {/* Value Prop */}
+            <p className="text-xl md:text-2xl text-zinc-600 leading-relaxed max-w-2xl mb-6">
+              Zero customs hassle. Zero paperwork. Zero surprises.
+              <br />
+              <span className="text-zinc-500">Delivered to Oman in 2-4 days.</span>
             </p>
+
+            {/* Trust Badges - Inline */}
+            <div className="flex flex-wrap gap-4 mb-8">
+              <div className="inline-flex items-center gap-2 bg-white border border-gray-200 rounded-full px-4 py-2 text-sm">
+                <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                <span className="font-medium">Buyer Protection</span>
+              </div>
+              <div className="inline-flex items-center gap-2 bg-white border border-gray-200 rounded-full px-4 py-2 text-sm">
+                <FileCheck className="w-4 h-4 text-blue-600" />
+                <span className="font-medium">Customs Handled</span>
+              </div>
+              <div className="inline-flex items-center gap-2 bg-white border border-gray-200 rounded-full px-4 py-2 text-sm">
+                <CreditCard className="w-4 h-4 text-amber-600" />
+                <span className="font-medium">Cash on Delivery</span>
+              </div>
+            </div>
             
-            {/* CTA */}
-            <div className="flex flex-col sm:flex-row items-start gap-4">
+            {/* CTA - Bigger & Bolder */}
+            <div className="flex flex-col sm:flex-row items-start gap-4 mb-10">
               <Link 
                 href="/products"
-                className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white text-base font-medium px-6 py-3.5 rounded-full transition-colors shadow-lg shadow-emerald-500/25"
+                className="inline-flex items-center gap-3 bg-emerald-500 hover:bg-emerald-600 text-white text-lg font-semibold px-8 py-4 rounded-full transition-all shadow-xl shadow-emerald-500/30 hover:shadow-emerald-500/40 hover:scale-[1.02]"
               >
-                Start Shopping
-                <ArrowRight className="w-4 h-4" />
+                Start Shopping Free
+                <ArrowRight className="w-5 h-5" />
               </Link>
               <Link 
                 href="#how" 
-                className="inline-flex items-center gap-2 text-zinc-600 hover:text-zinc-900 text-base font-medium px-6 py-3.5 transition-colors"
+                className="inline-flex items-center gap-2 text-zinc-500 hover:text-zinc-700 text-base font-medium py-4 transition-colors"
               >
-                See how it works
+                See how it works →
               </Link>
+            </div>
+
+            {/* Social Proof Quote */}
+            <div className="flex items-center gap-3 text-sm text-zinc-500">
+              <div className="flex">
+                {[1,2,3,4,5].map(i => (
+                  <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                ))}
+              </div>
+              <span>&ldquo;Finally, UAE shopping without the customs nightmare&rdquo; — Ahmed, Muscat</span>
             </div>
           </div>
         </div>
@@ -192,6 +234,40 @@ export default function Home() {
                   <div className="text-zinc-500 text-sm">{cat.count}+ items</div>
                 </div>
               </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-24 px-6 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-zinc-900">
+              What Omani shoppers say
+            </h2>
+            <p className="text-xl text-zinc-600">Join thousands of happy customers</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            {testimonials.map((t, i) => (
+              <div key={i} className="bg-white rounded-2xl p-8 border border-gray-200 hover:shadow-lg transition-shadow">
+                <div className="flex mb-4">
+                  {[1,2,3,4,5].map(star => (
+                    <Star key={star} className="w-5 h-5 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+                <p className="text-zinc-700 mb-6 text-lg">&ldquo;{t.text}&rdquo;</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-400 flex items-center justify-center text-white font-bold">
+                    {t.name[0]}
+                  </div>
+                  <div>
+                    <div className="font-semibold text-zinc-900">{t.name}</div>
+                    <div className="text-sm text-zinc-500">{t.location}</div>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
